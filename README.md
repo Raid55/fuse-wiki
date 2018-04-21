@@ -24,12 +24,12 @@
 ## File Descriptions
 
 ## Team
-Leader:    [David Yoon](https://github.com/daveyoon64)
+[David Yoon](https://github.com/daveyoon64), team lead
 
-Front-end: [Sid Carroll](https://github.com/squidcarroll)
+[Sid Carroll](https://github.com/squidcarroll), front-end
 
-           [Jay Biehler](https://github.com/biehler)
+[Jay Biehler](https://github.com/biehler), front-end
 
-Back-end:  [Nick Boutboul](https://github.com/raid55)
+[Nick Boutboul](https://github.com/raid55), back-end
 
-           [Jacob Hartman](https://github.com/jacobbhartman)
+[Jacob Hartman](https://github.com/jacobbhartman), back-end
