@@ -2,7 +2,7 @@
 
 ## Objectives
  * Create a minimum viable product
-   - Title and a prompt for th euser
+   - Title and a prompt for the user
    - Two inputs for the articles that want to be linked
    - A "connect" button
    - The output of which articles link them
@@ -24,8 +24,12 @@
 ## File Descriptions
 
 ## Team
-Leader:    [David Yoon](https://github.com/daveyoon64)
-Front-end: [Sid Carroll](https://github.com/squidcarroll)
-	   [Jay Biehler](https://github.com/biehler)
-Back-end:  [Nick Boutboul](https://github.com/raid55)
-	   [Jacob Hartman](https://github.com/jacobbhartman)
+[David Yoon](https://github.com/daveyoon64), team lead
+
+[Sid Carroll](https://github.com/squidcarroll), front-end
+
+[Jay Biehler](https://github.com/biehler), front-end
+
+[Nick Boutboul](https://github.com/raid55), back-end
+
+[Jacob Hartman](https://github.com/jacobbhartman), back-end
