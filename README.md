@@ -1,4 +1,4 @@
-# fuse dot wiki
+e dot wiki
 
 ## Objectives
  * Create a minimum viable product
@@ -26,6 +26,7 @@
 ## Team
 Leader:    [David Yoon](https://github.com/daveyoon64)
 Front-end: [Sid Carroll](https://github.com/squidcarroll)
-	   [Jay Biehler](https://github.com/biehler)
+           [Jay Biehler](https://github.com/biehler)
 Back-end:  [Nick Boutboul](https://github.com/raid55)
-	   [Jacob Hartman](https://github.com/jacobbhartman)
+           [Jacob Hartman](https://github.com/jacobbhartman)
+
