@@ -1,0 +1,19 @@
+{
+  "name": "fuse.wiki-server",
+  "version": "1.0.0",
+  "description": "Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raid55/fuse-wiki.git"
+  },
+  "author": "David Yoon, Sid Carroll, Jay Beihler, Jacob Hartman, Nicholas Boutboul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Raid55/fuse-wiki/issues"
+  },
+  "homepage": "https://github.com/Raid55/fuse-wiki#readme"
+}
