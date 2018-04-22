@@ -10,10 +10,18 @@
     "type": "git",
     "url": "git+https://github.com/Raid55/fuse-wiki.git"
   },
-  "author": "David Yoon, Sid Carroll, Jay Beihler, Jacob Hartman, Nicholas Boutboul",
+  "author": "David Yoon, Sid Carroll, Jay Biehler, Jacob Hartman, Nicholas Boutboul",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Raid55/fuse-wiki/issues"
   },
-  "homepage": "https://github.com/Raid55/fuse-wiki#readme"
+  "homepage": "https://github.com/Raid55/fuse-wiki#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "serve-favicon": "^2.5.0"
+  }
 }
