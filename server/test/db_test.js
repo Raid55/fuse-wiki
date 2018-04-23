@@ -7,7 +7,7 @@ const Sequelize = require('sequelize');
 db = new Db(Sequelize, "../fuse.sqlite", links, pages, redirects)
 
 db.sequelize.sync().then(() => {
-    test = await db.test(["20845297"])
-
-    console.log(test);
+    db.test(["20845297"]).then((res) => {
+        console.log(res);
+    })
 });
