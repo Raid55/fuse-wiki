@@ -17,9 +17,9 @@ class db {
         this.Sequelize = Sequelize;
         this.Op = this.Sequelize.Op;
         this.sequelize = new Sequelize(`sqlite:${db_path}`);
-        this.Links = this.sequelize.import(Links);
-        this.Pages = this.sequelize.import(Pages);
-        this.Redirects = this.sequelize.import(Redirects);
+        this.Links = this.sequelize.import("links", Links);
+        this.Pages = this.sequelize.import("pages", Pages);
+        this.Redirects = this.sequelize.import("redirects", Redirects);
     }
     // ["20845297"]
     test(arr) {
