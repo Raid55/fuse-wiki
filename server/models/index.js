@@ -35,10 +35,6 @@ class db {
             }
         })
         .then(links => {
-            console.log(links);
-            return links;
-        })
-        .then(links => {
             return links.map(obj => {
                 return obj.dataValues.outgoing_links.split("|");
             })
