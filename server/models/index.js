@@ -20,14 +20,17 @@ class db {
             dialect: 'sqlite',
             storage: db_path
         });
+
         this.Links = this.sequelize.import("links", Links);
         this.Pages = this.sequelize.import("pages", Pages);
         this.Redirects = this.sequelize.import("redirects", Redirects);
     }
-    // ["20845297"]
-    async test(arr) {
+
+    // takes in an array of ids and returns dict with
+    // key as id and value as array of outgoing ids
+    async find_outgoing(arr) {
         return await this.Links.findAll({
-            attributes: ["outgoing_links"],
+            attributes: ["id", "outgoing_links"],
             where: {
                 id: {
                     [this.Op.or]: arr
@@ -35,11 +38,42 @@ class db {
             }
         })
         .then(links => {
-            return links.map(obj => {
-                return obj.dataValues.outgoing_links.split("|");
-            })
+            if (links.length == 1)
+                return links.map(el => {
+                    return el.dataValues.outgoing_links.split("|");
+                });
+            else
+                return links.reduce((accu, el) => {
+                    accu[el.dataValues.id] = el.dataValues.outgoing_links.split("|");
+                    return accu;
+                }, {});
         })
     }
+
+    // takes in an array of ids and returns dict with
+    // key as id and value as array of incoming ids
+    async find_incoming(arr) {
+        return await this.Links.findAll({
+            attributes: ["id", "incoming_links"],
+            where: {
+                id: {
+                    [this.Op.or]: arr
+                }
+            }
+        })
+        .then(links => {
+            if (links.length == 1)
+                return links.map(el => {
+                    return el.dataValues.incoming_links.split("|");
+                });
+            else
+                return links.reduce((accu, el) => {
+                    accu[el.dataValues.id] = el.dataValues.incoming_links.split("|");
+                    return accu;
+                }, {});
+        })
+    }
+
 }
 
 module.exports = db;
