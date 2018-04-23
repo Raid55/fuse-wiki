@@ -13,40 +13,42 @@ def findTheWikiConnection(source_id, target_id, database):
         paths of Wikipedia articles that link a source article and a
         target article.
     '''
-    ##### ERROR CHECKING #####
+    ####### ERROR CHECKING #######
     # Check if the id's given are valid Wikipedia articles
     # Check if the database connection can be established
 
-    # Create an array of arrays called 'paths'.
-    # (Each inner array will contain strings that
-    # represent the 'page_title'(s) of each page in the path)
+    ####### SETUP #######
+    paths = []
 
-    ##### 0 DEGREES OF SEPARATION #####
-    # Check if 'source' and 'target' are the same article
+    ####### 0 DEGREES OF SEPARATION #######
+    if source_id == target_id:
+        return "They're the same article!"
 
-    ##### 1 DEGREE OF SEPARATION #####
-    # If an outgoing link from 'source' is the 'target' or
-    # if an incoming link from 'target' is the 'source'
-    #     Append to an inner array, two strings of 'source_title' and
-    #     'page_title'
-    
+    ####### 1 DEGREE OF SEPARATION #######
+    source_1 = 'ORM call that returns outgoing links from source'
+    if target_id in source_1:
+        paths.append([source_id, target_id])
+        return paths
 
-    ##### 2 DEGREES OF SEPARATION #####
-    # Create nodes of each outgoing link from the 'source page'
-    # For each node created:
-    #     if that node has an outgoing link that is the 'taget':
-    #         append to 'paths' a path of: source--current_node--target
-    # if 'paths' is non-empty:
-    #     return 'paths'
+    ####### 2 DEGREES OF SEPARATION #######
+    target_1 = 'ORM call that returns incoming links to target'
+    for article in source_1:
+        if article in target_1:
+            paths.append([source_id, article, target_id])
+    if paths is not None:
+        return paths
 
     ##### 3 DEGREES OF SEPARATION #####
-    # Create nodes of each incoming link to the 'target page'
-    # For each node created:
-    #     if that node has an incoming link that is any of the nodes that are:
-    #     1-degree from 'source':
-    #         append to 'paths' a path of 0src---1src---crrnt---0tgt
-    # if 'paths' is non-empty:
-    #     return 'paths'
+    source_2 = []
+    for article in source_1:
+        source_2.append('ORM call that returns outgoing links from each element in source_1')
+    for i in range(len(source_2)):
+        for article in source_2[i]:
+            if article in target_1:
+                paths.append(source_id, source_1[i], article, target_id)
+    if paths is not None:
+        return paths
+
 
     ##### 4 DEGREES OF SEPARATION #####
     # Creates nodes of each outgoing link from each '1src' node
@@ -55,6 +57,14 @@ def findTheWikiConnection(source_id, target_id, database):
     #         append to 'paths' a path of 0src---1src---crrnt---1tgt---0tgt
     # if 'paths' is non-empty:
     #     return 'paths'
+#
+ #   target_2 = []
+  #  for article in target_1:
+   #     target_2.append('ORM call that returns incoming links from each element in target_1')
+#    for i in range(len(target_2)):
+ #       for article in target_2[i]:
+  #          for j in
+
 
     ##### 5 DEGREES OF SEPARATION #####
     # Create nodes of each incoming link to each '1tgt' node
