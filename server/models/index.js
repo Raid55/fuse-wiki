@@ -63,11 +63,11 @@ class db {
         })
         .then(links => {
             if (links.length == 1)
-                await return links.map(el => {
+                return links.map(el => {
                     return el.dataValues.incoming_links.split("|");
                 });
             else
-                await return links.reduce((accu, el) => {
+                return links.reduce((accu, el) => {
                     accu[el.dataValues.id] = el.dataValues.incoming_links.split("|");
                     return accu;
                 }, {});
