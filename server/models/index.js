@@ -22,8 +22,8 @@ class db {
         this.Redirects = this.sequelize.import("redirects", Redirects);
     }
     // ["20845297"]
-    test(arr) {
-        this.Links.findAll({
+    async test(arr) {
+        return await this.Links.findAll({
             attributes: ["outgoing_links"],
             where: {
                 id: {
