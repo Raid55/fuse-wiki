@@ -23,7 +23,7 @@ class db {
     }
     // ["20845297"]
     test(arr) {
-        db.Links.findAll({
+        this.Links.findAll({
             attributes: ["outgoing_links"],
             where: {
                 id: {
