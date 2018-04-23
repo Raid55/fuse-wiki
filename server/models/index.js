@@ -36,6 +36,7 @@ class db {
                 return obj.dataValues.outgoing_links.split("|");
             })
         }
+    }
 }
 
 module.exports = db;
