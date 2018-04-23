@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-let sequelize = new Sequelize('sqlite:./fuse.db');
+let sequelize = new Sequelize('sqlite:./fuse.sqlite');
 
 
 module.exports = {
