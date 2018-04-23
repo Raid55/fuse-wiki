@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-let sequelize = new Sequelize('sqlite:./fuse.sqlite');
+// const Sequelize = require('sequelize');
+// let sequelize = new Sequelize('sqlite:./fuse.sqlite');
 
 
 // module.exports = {
@@ -35,7 +35,7 @@ class db {
             return links.map(obj => {
                 return obj.dataValues.outgoing_links.split("|");
             })
-        }
+        })
     }
 }
 
