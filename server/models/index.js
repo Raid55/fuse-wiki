@@ -16,7 +16,10 @@ class db {
     constructor(Sequelize, db_path, Links, Pages, Redirects) {
         this.Sequelize = Sequelize;
         this.Op = this.Sequelize.Op;
-        this.sequelize = new Sequelize(`sqlite:${db_path}`);
+        this.sequelize = new Sequelize('none', 'none', 'none', {
+            dialect: 'sqlite',
+            storage: db_path
+        });
         this.Links = this.sequelize.import("links", Links);
         this.Pages = this.sequelize.import("pages", Pages);
         this.Redirects = this.sequelize.import("redirects", Redirects);
