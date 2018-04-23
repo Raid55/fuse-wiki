@@ -14,12 +14,12 @@
 
 class db {
     constructor(Sequelize, db_path, Links, Pages, Redirects) {
-        self.Sequelize = Sequelize;
-        self.Op = self.Sequelize.Op;
-        self.sequelize = new Sequelize(`sqlite:${db_path}`);
-        self.Links = self.sequelize.import(Links);
-        self.Pages = self.sequelize.import(Pages);
-        self.Redirects = self.sequelize.import(Redirects);
+        this.Sequelize = Sequelize;
+        this.Op = this.Sequelize.Op;
+        this.sequelize = new Sequelize(`sqlite:${db_path}`);
+        this.Links = this.sequelize.import(Links);
+        this.Pages = this.sequelize.import(Pages);
+        this.Redirects = this.sequelize.import(Redirects);
     }
     // ["20845297"]
     test(arr) {
@@ -27,7 +27,7 @@ class db {
             attributes: ["outgoing_links"],
             where: {
                 id: {
-                    [self.Op.or]: arr
+                    [this.Op.or]: arr
                 }
             }
         })
