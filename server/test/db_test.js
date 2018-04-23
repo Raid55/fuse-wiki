@@ -7,10 +7,10 @@ const Sequelize = require('sequelize');
 db = new Db(Sequelize, "./fuse.sqlite", links, pages, redirects)
 
 db.sequelize.sync().then(() => {
-    dbTest();
+    dbTest(db);
 });
 
-async function dbTest(){
+async function dbTest(db){
     te1 = await db.find_incoming(['148201']);
     te2 = await db.find_outgoing(['148201']);
     te3 = await db.find_incoming(['146728', '148191']);
