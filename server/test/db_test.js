@@ -1,15 +1,13 @@
-const db = require('./models');
-const Op = db.Sequelize.Op;
+const Db = require('../models');
+const links = require('../models/links.js');
+const redirects = require('../models/redirects.js');
+const pages = require('../models/pages.js')
+const Sequelize = require('sequelize');
+
+db = Db(Sequelize, "../fuse.sqlite", links, pages, redirects)
 
 db.sequelize.sync().then(() => {
-    test = db.Links.findAll(
-        where: {
-            attributes: ['incoming_links_count', 'incoming_link'],
-            id: {
-                [Op.contains]: ["1080220"]
-            } 
-        }
-    )
+    test = db.test(["20845297"])
 
     console.log(test);
 });
