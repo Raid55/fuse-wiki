@@ -6,9 +6,7 @@ const favicon    = require('serve-favicon');
 const bodyParser = require('body-parser');
 
 //Importing routes
-const {
-    api
-} = require('./routes');
+const { api } = require('./routes');
 
 //express app
 const app = express();

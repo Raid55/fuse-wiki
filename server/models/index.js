@@ -1,4 +1,10 @@
-class db {
+const Sequelize = require('sequelize');
+// importing models
+const links = require('./links.js');
+const pages = require('./pages.js');
+const redirects = require('./redirects.js');
+
+class Database {
     constructor(Sequelize, db_path, Links, Pages, Redirects) {
         this.Sequelize = Sequelize;
         this.Op = this.Sequelize.Op;
@@ -58,4 +64,5 @@ class db {
 
 }
 
-module.exports = db;
+// Creating the Database connection
+module.exports = new Database(Sequelize, "./fuse.sqlite", links, pages, redirects);
