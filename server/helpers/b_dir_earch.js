@@ -1,5 +1,3 @@
-import { NONAME } from 'dns';
-
 const db = require('../models');
 
 module.exports = async function(db, source_id, target_id) {
@@ -15,6 +13,7 @@ module.exports = async function(db, source_id, target_id) {
 
     // 1 Degree of Separation
     let source_1 = await db.findOutgoing([source_id]);
+    // console.log(source_1);
     if (source_1.includes(target_id)) {
         paths.push([source_id, target_id]);
         return paths;
@@ -22,7 +21,8 @@ module.exports = async function(db, source_id, target_id) {
 
     // 2 Degrees of Separation
     target_1 = await db.findOutgoing([target_id]);
-    for (article in source_1) {
+    // console.log(target_1);
+    for (article of source_1) {
         if (target_1.includes(article))
             paths.push([source_id, article, target_id]);
     }
@@ -30,9 +30,10 @@ module.exports = async function(db, source_id, target_id) {
         return paths;
 
     // 3 Degress of Separation
-    source_2 = await db.findOutgoing([source_1]);
-    for (key in source_2) {
-        for (article in source_2[key]) {
+    console.log(source_1);
+    source_2 = await db.findOutgoing(source_1);
+    for (key of source_2) {
+        for (article of source_2[key]) {
             if (target_1.includes(article))
                 paths.push([source_id, key, article, target_id]);
         }

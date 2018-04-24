@@ -38,6 +38,9 @@ class Database {
                     return accu;
                 }, {});
         })
+        .catch(err => {
+            console.log("findOutgoing", err)
+        })
     }
 
     // takes in an array of ids and returns dict with
@@ -59,7 +62,10 @@ class Database {
                     accu[el.dataValues.id] = el.dataValues.incoming_links.split("|");
                     return accu;
                 }, {});
-        });
+        })
+        .catch(err => {
+            console.log("findIncoming", err)
+        })
     }
 
     async findTitle(id) {
@@ -71,7 +77,41 @@ class Database {
         })
         .then(page => {
             return page[0].dataValues.title;
-        });
+        })
+        .catch(err => {
+            console.log("findTitle", err)
+        })
+    }
+
+    async findTitles(idArr) {
+        let tmpArr = [];
+        let fArr = [];
+        for (let arr of res) {
+            console.log(arr);
+            tmpArr = [];
+            for (let tId of arr) {
+                tmpArr.push(await this.findTitle(tId));
+            }
+            fArr.push(tmpArr);
+        }
+        return fArr;
+        // return await idArr.reduce(async (accu, el) => {
+        //     return await this.Pages.findAll({
+        //         attributes: ["title"],
+        //         id: {
+        //             [this.Op.or]: el
+        //         }
+        //     })
+        //     .then(page => {
+        //         return page.reduce((accu, el) => {
+        //             accu.push(el.dataValue.title);
+        //             return accu;
+        //         }, []);
+        //     })
+        //     .catch(err => {
+        //         console.log("findTitles", err)
+        //     })
+        // })
     }
 
 }
