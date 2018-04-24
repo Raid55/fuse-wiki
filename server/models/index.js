@@ -20,7 +20,7 @@ class Database {
 
     // takes in an array of ids and returns dict with
     // key as id and value as array of outgoing ids
-    async find_outgoing(arr) {
+    async findOutgoing(arr) {
         return await this.Links.findAll({
             attributes: ["id", "outgoing_links"],
             where: {
@@ -42,7 +42,7 @@ class Database {
 
     // takes in an array of ids and returns dict with
     // key as id and value as array of incoming ids
-    async find_incoming(arr) {
+    async findIncoming(arr) {
         return await this.Links.findAll({
             attributes: ["id", "incoming_links"],
             where: {
@@ -59,7 +59,19 @@ class Database {
                     accu[el.dataValues.id] = el.dataValues.incoming_links.split("|");
                     return accu;
                 }, {});
+        });
+    }
+
+    async findTitle(id) {
+        return await this.Pages.findAll({
+            attributes: ["title"],
+            where: {
+                id: id
+            }
         })
+        .then(page => {
+            return page[0].dataValues.title;
+        });
     }
 
 }
