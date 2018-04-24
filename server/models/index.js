@@ -1,17 +1,3 @@
-// const Sequelize = require('sequelize');
-// let sequelize = new Sequelize('sqlite:./fuse.sqlite');
-
-
-// module.exports = {
-//     // Sequelize
-//     Sequelize: Sequelize,
-//     sequelize: sequelize,
-//     // Models
-//     Links: sequelize.import(__dirname + '/links.js'),
-//     Pages: sequelize.import(__dirname + '/page.js'),
-//     Redirects: sequelize.import(__dirname + '/redirects.js')
-// }
-
 class db {
     constructor(Sequelize, db_path, Links, Pages, Redirects) {
         this.Sequelize = Sequelize;
@@ -39,9 +25,7 @@ class db {
         })
         .then(links => {
             if (links.length == 1)
-                return links.map(el => {
-                    return el.dataValues.outgoing_links.split("|");
-                });
+                return links[0].dataValues.outgoing_links.split("|");
             else
                 return links.reduce((accu, el) => {
                     accu[el.dataValues.id] = el.dataValues.outgoing_links.split("|");
@@ -63,9 +47,7 @@ class db {
         })
         .then(links => {
             if (links.length == 1)
-                return links.map(el => {
-                    return el.dataValues.incoming_links.split("|");
-                });
+                return links[0].dataValues.incoming_links.split("|");
             else
                 return links.reduce((accu, el) => {
                     accu[el.dataValues.id] = el.dataValues.incoming_links.split("|");
