@@ -20,7 +20,7 @@ class Database {
 
     // takes in an array of ids and returns dict with
     // key as id and value as array of outgoing ids
-    async find_outgoing(arr) {
+    async findOutgoing(arr) {
         return await this.Links.findAll({
             attributes: ["id", "outgoing_links"],
             where: {
@@ -38,11 +38,14 @@ class Database {
                     return accu;
                 }, {});
         })
+        .catch(err => {
+            console.log("findOutgoing", err)
+        })
     }
 
     // takes in an array of ids and returns dict with
     // key as id and value as array of incoming ids
-    async find_incoming(arr) {
+    async findIncoming(arr) {
         return await this.Links.findAll({
             attributes: ["id", "incoming_links"],
             where: {
@@ -60,6 +63,55 @@ class Database {
                     return accu;
                 }, {});
         })
+        .catch(err => {
+            console.log("findIncoming", err)
+        })
+    }
+
+    async findTitle(id) {
+        return await this.Pages.findAll({
+            attributes: ["title"],
+            where: {
+                id: id
+            }
+        })
+        .then(page => {
+            return page[0].dataValues.title;
+        })
+        .catch(err => {
+            console.log("findTitle", err)
+        })
+    }
+
+    async findTitles(idArr) {
+        let tmpArr = [];
+        let fArr = [];
+        for (let arr of res) {
+            console.log(arr);
+            tmpArr = [];
+            for (let tId of arr) {
+                tmpArr.push(await this.findTitle(tId));
+            }
+            fArr.push(tmpArr);
+        }
+        return fArr;
+        // return await idArr.reduce(async (accu, el) => {
+        //     return await this.Pages.findAll({
+        //         attributes: ["title"],
+        //         id: {
+        //             [this.Op.or]: el
+        //         }
+        //     })
+        //     .then(page => {
+        //         return page.reduce((accu, el) => {
+        //             accu.push(el.dataValue.title);
+        //             return accu;
+        //         }, []);
+        //     })
+        //     .catch(err => {
+        //         console.log("findTitles", err)
+        //     })
+        // })
     }
 
 }

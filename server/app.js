@@ -39,7 +39,7 @@ app.get("*", (req, res) => {
 })
 
 // Applying Routes
-app.use('/api', api);
+app.use('/api/v1', api);
 
 
 module.exports = app;
