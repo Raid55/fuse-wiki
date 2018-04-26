@@ -1,6 +1,6 @@
 # database
 fuse.sqlite
-
+*.gz
 
 # Logs
 logs
