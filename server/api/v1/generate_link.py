@@ -6,7 +6,7 @@ from helpers.wikipedia_api import wiki_search_id
 from models import db
 
 
-@api_v1.route('/generate_link', methods=['PUT'])
+@api_v1.route('/generate_link', methods=['POST'])
 def generate_link():
     data = request.get_json()
 
