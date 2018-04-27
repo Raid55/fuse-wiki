@@ -39,7 +39,7 @@ class Database:
         return {row[0]: row[1].split("|") for row in res}
 
     def find_title(self, id):
-
+        pass
 
 
     def find_titles(self, arr):
