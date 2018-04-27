@@ -2,7 +2,7 @@
 import socket
 from models import db
 from os import getenv
-from api import api_v1
+from api.v1 import api_v1
 from flask import Flask, make_response, jsonify
 
 app = Flask(__name__)
