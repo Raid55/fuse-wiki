@@ -15,7 +15,7 @@ class Database:
         if not os.path.isfile(DBArchive_path):
             raise IOError('{} does not exist'.format(DBArchive_path))
 
-        self.__connection = sqlite3.connect(DBArchive_path)
+        self.__connection = sqlite3.connect(DBArchive_path, check_same_thread=False)
         self.__curr = self.__connection.cursor()
         
 

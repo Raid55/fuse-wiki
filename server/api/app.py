@@ -20,14 +20,14 @@ def not_found(err):
     return make_response(jsonify({"error": "There is nothing here..."}), 404)
 
 if __name__ == "__main__":
-    try:
-        host_name = socket.gethostname()
-        app_host = socket.gethostbyname(host_name)
-    except:
-        app_host = getenv('API_HOST')
-        if app_host is None:
-            app_host = '0.0.0.0'
-    
+    #try:
+    #   host_name = socket.gethostname()
+    #   app_host = socket.gethostbyname(host_name)
+    #except:
+    #   app_host = getenv('API_HOST')
+    #   if app_host is None:
+    app_host = '206.189.73.204'
+
     app_port = getenv('API_PORT')
     if app_port is None:
         app_port = 8080
