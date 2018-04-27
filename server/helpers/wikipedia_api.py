@@ -10,7 +10,7 @@ def test_return(ret):
         tests return and returns true or false
     """
     # test if status code is correct
-    if ret.status_code != 200 or != 201:
+    if ret.status_code != 200 or ret.status_code != 201:
         return False
     # test if json is correct
     try:
