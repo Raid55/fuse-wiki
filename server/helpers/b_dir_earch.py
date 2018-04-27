@@ -23,27 +23,25 @@ def findTheWikiConnection(db, source_id, target_id):
         return "They're the same article!"
 
     ####### 1 DEGREE OF SEPARATION #######
-    source_1 = 'ORM call that returns outgoing links from source'
-    if target_id in source_1:
+    source_1 = db.find_outgoing([source_id])
+    if target_id in source_1[source_id]:
         paths.append([source_id, target_id])
         return paths
 
     ####### 2 DEGREES OF SEPARATION #######
-    target_1 = 'ORM call that returns incoming links to target'
-    for article in source_1:
-        if article in target_1:
+    target_1 = db.find_incoming([target_id])
+    for article in source_1[source_id]:
+        if article in target_1[target_id]:
             paths.append([source_id, article, target_id])
     if paths is not None:
         return paths
 
     ##### 3 DEGREES OF SEPARATION #####
-    source_2 = []
-    for article in source_1:
-        source_2.append('ORM call that returns outgoing links from each element in source_1')
-    for i in range(len(source_2)):
-        for article in source_2[i]:
-            if article in target_1:
-                paths.append(source_id, source_1[i], article, target_id)
+    source_2 = db.find_outgoing(source_1)
+    for k, v in source_2.item():
+        for article in v:
+            if article in target_1[target_id]:
+                paths.append(source_id, k, article, target_id)
     if paths is not None:
         return paths
 
