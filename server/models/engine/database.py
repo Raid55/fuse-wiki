@@ -51,7 +51,7 @@ class Database:
         return [self.find_title(page_id) for page_id in arr]
 
     def test(self, source_id, target_id):
-        return matrix_ids_to_titles(findTheWikiConnection(self, source_id, target_id))
+        return self.matrix_ids_to_titles(findTheWikiConnection(self, source_id, target_id))
 
 
     def close(self):
