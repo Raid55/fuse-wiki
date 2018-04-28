@@ -1,14 +1,12 @@
 import os.path
 import sqlite3
-
+from helpers.b_dir_earch import findTheWikiConnection 
 
 
 class Database:
     """
         DB connection
     """
-    __connection = None
-    __curr = None
 
     def __init__(self, DBArchive_path="./fuse.sqlite"):
 
@@ -38,12 +36,17 @@ class Database:
         res = self.__curr.execute(query.format(str(tuple(arr))))
         return {row[0]: row[1].split("|") for row in res}
 
+    
+
     def find_title(self, id):
         pass
 
 
     def find_titles(self, arr):
         cache = {}
+
+    def test(self, source_id, target_id):
+        return findTheWikiConnection(self, source_id, target_id)
 
 
     def close(self):
