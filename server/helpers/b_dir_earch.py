@@ -15,6 +15,10 @@ def findTheWikiConnection(db, source_id, target_id):
     # Check if the id's given are valid Wikipedia articles
     # Check if the database connection can be established
 
+
+    if source_id is None or target_id is None:
+        return [] 
+
     ####### SETUP #######
     paths = []
 

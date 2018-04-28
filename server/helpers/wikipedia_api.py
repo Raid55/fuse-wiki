@@ -45,6 +45,8 @@ def wiki_search_id(query):
             return None
         else:
             rJson = ret.json()
-    
-    return rJson['query']['search'][0]['pageid']
+    try:
+        return rJson['query']['search'][0]['pageid']
+    except:
+        return None
     
