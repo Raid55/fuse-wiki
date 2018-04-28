@@ -46,5 +46,5 @@ def wiki_search_id(query):
         else:
             rJson = ret.json()
     
-    return rJson['query']['search'][0]['pageid']
+    return str(rJson['query']['search'][0]['pageid'])
     

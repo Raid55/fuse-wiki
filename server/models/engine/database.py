@@ -23,7 +23,8 @@ class Database:
             for each elem
         """
         query = "SELECT id, outgoing_links FROM links WHERE id IN {}"
-        res = self.__curr.execute(query.format(str(tuple(arr))))
+        # print(query)
+        res = self.__curr.execute(query.format(str(tuple(arr)).replace(',)', ')')))
         return {row[0]: row[1].split("|") for row in res}
         
 
@@ -33,7 +34,8 @@ class Database:
             for each elem
         """
         query = "SELECT id, incoming_links FROM links WHERE id IN {}"
-        res = self.__curr.execute(query.format(str(tuple(arr))))
+        # print(query)
+        res = self.__curr.execute(query.format(str(tuple(arr)).replace(',)', ')')))
         return {row[0]: row[1].split("|") for row in res}
 
     
