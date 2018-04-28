@@ -43,8 +43,8 @@ class Database:
 
     def find_title(self, page_id):
         query = "SELECT title FROM pages WHERE id={}"
-        # print(query)
-        return self.__curr.execute(query.format(page_id))[0]
+        return [row for row in self.__curr.execute(query.format(page_id))][0]
+     
 
 
     def find_titles(self, arr):
