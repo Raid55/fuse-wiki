@@ -38,17 +38,20 @@ class Database:
         res = self.__curr.execute(query.format(str(tuple(arr)).replace(',)', ')')))
         return {row[0]: row[1].split("|") for row in res}
 
-    
+    def matrix_ids_to_titles(self, matrix):
+        return [self.find_titles(row) for row in matrix]
 
-    def find_title(self, id):
-        pass
+    def find_title(self, page_id):
+        query = "SELECT title FROM pages WHERE id={}"
+        # print(query)
+        return self.__curr.execute(query.format(page_id))[0]
 
 
     def find_titles(self, arr):
-        cache = {}
+        return [self.find_title(page_id) for page_id in arr]
 
     def test(self, source_id, target_id):
-        return findTheWikiConnection(self, source_id, target_id)
+        return matrix_ids_to_titles(findTheWikiConnection(self, source_id, target_id))
 
 
     def close(self):
