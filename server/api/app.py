@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import socket
-from models import db
+# from models import db
 from os import getenv
 from api.v1 import api_v1
 from flask import Flask, make_response, jsonify
@@ -11,9 +11,9 @@ app = Flask(__name__)
 app.register_blueprint(api_v1, url_prefix='/v1')
 
 
-@app.teardown_appcontext
-def close_method(exception):
-    db.close()
+# @app.teardown_appcontext
+# def close_method(exception):
+#     db.close()
 
 @app.errorhandler(404)
 def not_found(err):
