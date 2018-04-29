@@ -19,6 +19,9 @@ def findTheWikiConnection(db, source_id, target_id):
     if source_id is None or target_id is None:
         return [] 
 
+    print(source_id, target_id)
+    source_id = str(source_id)
+    target_id = str(target_id)
     ####### SETUP #######
     paths = []
 
@@ -37,17 +40,21 @@ def findTheWikiConnection(db, source_id, target_id):
     for article in source_1[source_id]:
         if article in target_1[target_id]:
             paths.append([source_id, article, target_id])
-    if paths is not None:
+    if len(paths) != 0:
         return paths
 
     ##### 3 DEGREES OF SEPARATION #####
-    source_2 = db.find_outgoing(source_1)
-    for k, v in source_2.item():
+    source_2 = db.find_outgoing(source_1[source_id])
+    # print(source_2)
+    # print(target_1)
+    for k, v in source_2.items():
+        print(k, v)
         for article in v:
             if article in target_1[target_id]:
-                paths.append(source_id, k, article, target_id)
-    if paths is not None:
+                paths.append([source_id, k, article, target_id])
+    if len(paths) != 0:
         return paths
+
 
 
     ##### 4 DEGREES OF SEPARATION #####

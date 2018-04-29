@@ -25,7 +25,7 @@ class Database:
         query = "SELECT id, outgoing_links FROM links WHERE id IN {}"
         # print(query)
         res = self.__curr.execute(query.format(str(tuple(arr)).replace(',)', ')')))
-        return {row[0]: row[1].split("|") for row in res}
+        return {str(row[0]): row[1].split("|") for row in res}
         
 
     def find_incoming(self, arr):
@@ -36,7 +36,7 @@ class Database:
         query = "SELECT id, incoming_links FROM links WHERE id IN {}"
         # print(query)
         res = self.__curr.execute(query.format(str(tuple(arr)).replace(',)', ')')))
-        return {row[0]: row[1].split("|") for row in res}
+        return {str(row[0]): row[1].split("|") for row in res}
 
     def matrix_ids_to_titles(self, matrix):
         return [self.find_titles(row) for row in matrix]
@@ -51,7 +51,11 @@ class Database:
         return [self.find_title(page_id) for page_id in arr]
 
     def test(self, source_id, target_id):
-        return self.matrix_ids_to_titles(findTheWikiConnection(self, source_id, target_id))
+        resMatrix = findTheWikiConnection(self, source_id, target_id)
+        print("test", resMatrix)
+        if (type(resMatrix) == str):
+            return resMatrix
+        return self.matrix_ids_to_titles(resMatrix)
 
 
     def close(self):

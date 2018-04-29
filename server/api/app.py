@@ -19,6 +19,10 @@ app.register_blueprint(api_v1, url_prefix='/v1')
 def not_found(err):
     return make_response(jsonify({"error": "There is nothing here..."}), 404)
 
+@app.route("/", methods=['GET'])
+def root_test():
+    return jsonify({"status": "ok"}), 200
+
 if __name__ == "__main__":
     #try:
     #   host_name = socket.gethostname()
@@ -30,6 +34,6 @@ if __name__ == "__main__":
 
     app_port = getenv('API_PORT')
     if app_port is None:
-        app_port = 8080
+        app_port = 80
     
     app.run(host=app_host, port=int(app_port))
