@@ -8,7 +8,7 @@ class Database:
         DB connection
     """
 
-    def __init__(self, DBArchive_path="./fuse.sqlite", DB):
+    def __init__(self, DBArchive_path="./fuse.sqlite"):
 
         if not os.path.isfile(DBArchive_path):
             raise IOError('{} does not exist'.format(DBArchive_path))
