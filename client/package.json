@@ -1,7 +1,7 @@
 {
-  "name": "fuse.wiki-server",
+  "name": "fuse.wiki-client",
   "version": "1.0.0",
-  "description": "Server",
+  "description": "server to client",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/Raid55/fuse-wiki#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
