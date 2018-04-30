@@ -1,7 +1,6 @@
 from models import Database
 from api.v1 import api_v1
 from flask import jsonify, abort, request
-from helpers.b_dir_earch import findTheWikiConnection
 from helpers.wikipedia_api import wiki_search_id
 import time
 
