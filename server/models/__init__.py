@@ -2,5 +2,5 @@
     Package initializer
 '''
 
-from models.engine import Database
+from models.database import Database
 

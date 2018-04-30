@@ -1,6 +1,6 @@
 import os.path
 import sqlite3
-from helpers.b_dir_earch import findTheWikiConnection 
+from helpers.b_dir_earch import brute_force_algo
 
 
 class Database:
@@ -8,7 +8,7 @@ class Database:
         DB connection
     """
 
-    def __init__(self, DBArchive_path="./fuse.sqlite"):
+    def __init__(self, DBArchive_path="./fuse.sqlite", DB):
 
         if not os.path.isfile(DBArchive_path):
             raise IOError('{} does not exist'.format(DBArchive_path))
@@ -38,24 +38,25 @@ class Database:
         res = self.__curr.execute(query.format(str(tuple(arr)).replace(',)', ')')))
         return {str(row[0]): row[1].split("|") for row in res}
 
-    def matrix_ids_to_titles(self, matrix):
-        return [self.find_titles(row) for row in matrix]
 
     def find_title(self, page_id):
         query = "SELECT title FROM pages WHERE id={}"
         return [row for row in self.__curr.execute(query.format(page_id))][0]
-     
-
 
     def find_titles(self, arr):
         return [self.find_title(page_id) for page_id in arr]
 
-    def test(self, source_id, target_id):
-        resMatrix = findTheWikiConnection(self, source_id, target_id)
-        print("test", resMatrix)
+    # //// bundled functions //////////////////////////////////////////
+
+    def matrix_ids_to_titles(self, matrix):
+        return [self.find_titles(row) for row in matrix]
+
+    def findTheWikiConnection(self, source_id, target_id):
+        resMatrix = brute_force_algo(self, source_id, target_id)
         if (type(resMatrix) == str):
             return resMatrix
         return self.matrix_ids_to_titles(resMatrix)
+
 
 
     def close(self):

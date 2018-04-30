@@ -5,7 +5,7 @@
 '''
 
 
-def findTheWikiConnection(db, source_id, target_id):
+def brute_force_algo(db, source_id, target_id):
     '''
         This Python method contains an algorithm that will find 0, 1, or more
         paths of Wikipedia articles that link a source article and a
@@ -27,7 +27,7 @@ def findTheWikiConnection(db, source_id, target_id):
 
     ####### 0 DEGREES OF SEPARATION #######
     if source_id == target_id:
-        return "They're the same article!"
+        return [0]
 
     ####### 1 DEGREE OF SEPARATION #######
     source_1 = db.find_outgoing([source_id])

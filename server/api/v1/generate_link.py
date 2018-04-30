@@ -21,7 +21,7 @@ def generate_link():
     if not data['raw_target_title']:
         return jsonify({'error': 'Missing raw_target_title'}), 400
     
-    results = db.test(
+    results = db.findTheWikiConnection(
         wiki_search_id(data['raw_source_title']),
         wiki_search_id(data['raw_target_title'])
     )
