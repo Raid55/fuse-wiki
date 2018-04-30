@@ -6,10 +6,9 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Header />
         <div className="ui center aligned container">
-          <Header />
           <Fuse />
-          <button>owowow</button>
         </div>
       </div>
     );
