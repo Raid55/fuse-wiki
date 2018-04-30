@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 class Form extends Component {
   render() {
-    
+
     return (
       <div>
         <h1 className="ui header">Input two Wikipedia pages and press fuse</h1>
@@ -19,7 +19,7 @@ class Form extends Component {
             </div>
           </div>
         </form>
-        <button className="ui orange button" type="submit">Fuse</button>
+        <button className={ this.props.isLoading  ? "ui loading orange button" : "ui orange button" } type="submit">Fuse</button>
       </div>
     );
   }
