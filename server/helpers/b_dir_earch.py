@@ -64,13 +64,16 @@ def bi_dir_earch(db, source_id, target_id):
                 start = time()
                 target_tree[target_id] = db.find_incoming(target_tree[target_id])
                 print("4thDB: ", time() - start)
-                for tgt1, tgt2_arr in target_tree[target_id].items():
-                    for tgt2 in tgt2_arr:
-                        for src1, src2_arr in source_tree[source_id].items():
-                            if tgt2 in src2_arr:
-                                print("4th... ", time() - start)
-                                paths.append([source_id, src1, tgt2, tgt1, target_id])
+                for tgt1, tgt2_arr in target_tree[target_id.items():
+                    for src1, src2_arr in source_tree[source_id].items():
+                        matches = set(tgt2_arr).intersection(src2_arr)
+                        for match in matches:
+                            paths.append([source_id, src1, match, tgt1, target_id])
                 print("4th: ", time() - start)
+
+
+                            
+
 
     return paths
 
