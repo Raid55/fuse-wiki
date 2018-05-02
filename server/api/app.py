@@ -4,9 +4,11 @@ import socket
 from os import getenv
 from api.v1 import api_v1
 from flask import Flask, make_response, jsonify
+from flask_cors import CORS
+
 
 app = Flask(__name__)
-
+CORS(app)
 
 app.register_blueprint(api_v1, url_prefix='/v1')
 

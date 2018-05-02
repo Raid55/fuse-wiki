@@ -41,6 +41,7 @@ class Database:
 
     def find_title(self, page_id):
         query = "SELECT title FROM pages WHERE id={}"
+        print([row for row in self.__curr.execute(query.format(page_id))][0])
         return [row for row in self.__curr.execute(query.format(page_id))][0]
 
     def find_titles(self, arr):
@@ -55,6 +56,7 @@ class Database:
         resMatrix = bi_dir_earch(self, source_id, target_id)
         if (type(resMatrix) == str):
             return resMatrix
+        
         return self.matrix_ids_to_titles(resMatrix)
 
 
