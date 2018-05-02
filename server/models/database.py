@@ -1,6 +1,6 @@
 import os.path
 import sqlite3
-from helpers.b_dir_earch import brute_force_algo
+from helpers.b_dir_earch import bi_dir_earch
 
 
 class Database:
@@ -52,7 +52,7 @@ class Database:
         return [self.find_titles(row) for row in matrix]
 
     def findTheWikiConnection(self, source_id, target_id):
-        resMatrix = brute_force_algo(self, source_id, target_id)
+        resMatrix = bi_dir_earch(self, source_id, target_id)
         if (type(resMatrix) == str):
             return resMatrix
         return self.matrix_ids_to_titles(resMatrix)
