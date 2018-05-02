@@ -28,8 +28,9 @@ def bi_dir_earch(db, source_id, target_id):
     source_depth = 0
     target_depth = 0
 
-    while len(paths) == 0 or (source_depth < 4 and target_depth < 3):
-        if (source_depth == target_depth):
+
+    while len(paths) == 0 and (source_depth < 3 or target_depth < 3):
+        if source_depth == target_depth:
             source_depth += 1
 
             if source_depth == 1:
