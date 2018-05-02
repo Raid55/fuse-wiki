@@ -15,15 +15,53 @@ def bi_dir_earch(db, source_id, target_id):
     if source_id is None or target_id is None:
         return "Error: There was a non-existent source or target article"
 
-    ##### DECLARE PERSISTENT OBJECTS #####
-    source_tree = "SQLite call"
-    target_tree = "SQLite call"
-    source_depth = 0
-    target_depth = 0
-
     ##### ZERO DEGREES OF SEPARATION #####
     if source_id == target_id:
         return [source_id, target_id]
 
-    ##### ONE DEGREE OF SEPARATION #####
-    fallacious
+    ##### DECLARE PERSISTENT OBJECTS #####
+    paths = []
+    source_id = str(source_id)
+    target_id = str(target_id)
+    source_tree = {}
+    target_tree = {}
+    source_depth = 0
+    target_depth = 0
+
+    while len(paths) == 0 or (source_depth < 4 and target_depth < 3):
+        if (source_depth == target_depth):
+            source_depth += 1
+
+            if source_depth == 1:
+                source_tree = db.find_outgoing([source_id])
+                if target_id in source_tree[source_id]:
+                    paths.append([source_id, target_id])
+
+            if source_depth == 2:
+                source_tree[source_id] = db.find_outgoing(source_tree[source_id])
+                for src1, src2_arr in source_tree[source_id].items():
+                    for src2 in src2_arr:
+                        if src2 in target_tree[target_id]:
+                            paths.append([source_id, src1, src2, target_id])
+                
+                
+        else:
+            target_depth += 1
+
+            if target_depth == 1:
+                target_tree = db.find_incoming([target_id])
+                for article in source_tree[source_id]:
+                    if article in target_tree[target_id]:
+                        paths.append([source_id, article, target_id])
+
+            if target_depth == 2:
+                target_tree[target_id] = db.find_incoming(target_tree[source_id])
+                for tgt1, tgt2_arr in target_tree[target_id].items():
+                    for tgt2 in tgt2_arr:
+                        for src1, src2_arr in source_tree[source_id].items():
+                            if tgt2 in src2_arr:
+                                paths.append([source_id, src1, tgt2, tgt1, target_id])
+
+    return paths
+
+
