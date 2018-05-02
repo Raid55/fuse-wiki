@@ -53,7 +53,7 @@ def bi_dir_earch(db, source_id, target_id):
                 for key, value in source_tree[source_id].items():
                     source_tree[source_id][key] = db.find_outgoing(value)
                 for src1, src2_dict in source_tree[source_id].items():
-                    for src2, src3_arr in src2_dict:
+                    for src2, src3_arr in src2_dict.items():
                         for tgt1, tgt2_arr in target_tree[target_id].items():
                             matches = set(tgt2_arr).intersection(src3_arr)
                             for match in matches:
