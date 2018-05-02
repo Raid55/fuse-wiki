@@ -48,6 +48,17 @@ def bi_dir_earch(db, source_id, target_id):
                             paths.append([source_id, src1, src2, target_id])
                 print("3rd: ", time() - start)
                 
+            if source_depth == 3:
+                start = time()
+                for key, value in source_tree[source_id].items():
+                    source_tree[source_id][key] = db.find_outgoing(value)
+                for src1, src2_dict in source_tree[source_id].items():
+                    for src2, src3_arr in src2_dict:
+                        for tgt1, tgt2_arr in target_tree[target_id].items():
+                            matches = set(tgt2_arr).intersection(src3_arr)
+                            for match in matches:
+                                paths.append([source_id, src1, src2, match, tgt1, target_id])
+                print("5th: ", time() - start)
                 
         else:
             target_depth += 1
@@ -63,7 +74,6 @@ def bi_dir_earch(db, source_id, target_id):
             if target_depth == 2:
                 start = time()
                 target_tree[target_id] = db.find_incoming(target_tree[target_id])
-                print("4thDB: ", time() - start)
                 for tgt1, tgt2_arr in target_tree[target_id].items():
                     for src1, src2_arr in source_tree[source_id].items():
                         matches = set(tgt2_arr).intersection(src2_arr)

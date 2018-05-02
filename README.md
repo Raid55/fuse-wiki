@@ -9,7 +9,11 @@
    - Domain name and server
  * Extra features for the future
 
-## Features
+## Future Features
+ * Create a function (that is called from the algo) that will match and return the matches
+ * Blog post
+ * Combine all 6 degrees into a unified algo
+ * Error handling
 
 ## Stack
  * Front-end: HTML, CSS, React
