@@ -68,6 +68,7 @@ def bi_dir_earch(db, source_id, target_id):
                     for tgt2 in tgt2_arr:
                         for src1, src2_arr in source_tree[source_id].items():
                             if tgt2 in src2_arr:
+                                print("4th... ", time() - start)
                                 paths.append([source_id, src1, tgt2, tgt1, target_id])
                 print("4th: ", time() - start)
 
