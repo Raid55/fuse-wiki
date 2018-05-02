@@ -56,7 +56,7 @@ def bi_dir_earch(db, source_id, target_id):
                         paths.append([source_id, article, target_id])
 
             if target_depth == 2:
-                target_tree[target_id] = db.find_incoming(target_tree[source_id])
+                target_tree[target_id] = db.find_incoming(target_tree[target_id])
                 for tgt1, tgt2_arr in target_tree[target_id].items():
                     for tgt2 in tgt2_arr:
                         for src1, src2_arr in source_tree[source_id].items():
