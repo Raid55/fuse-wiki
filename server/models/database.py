@@ -55,7 +55,8 @@ class Database:
         resMatrix = bi_dir_earch(self, source_id, target_id)
         if (type(resMatrix) == str):
             return resMatrix
-        return self.matrix_ids_to_titles(resMatrix)
+	return resMatrix
+        # return self.matrix_ids_to_titles(resMatrix)
 
 
 
