@@ -46,7 +46,7 @@ def bi_dir_earch(db, source_id, target_id):
                 start = time()
                 source_tree[source_id] = db.find_outgoing(source_tree[source_id])
                 for src1, src2_arr in source_tree[source_id].items():                    
-                    for match in findMatch(src2_arr, target_tree[target_id]):
+                    for match in findMatches(src2_arr, target_tree[target_id]):
                         paths.append([source_id, src1, match, target_id])
 #                    for src2 in src2_arr:
  #                       if src2 in target_tree[target_id]:
@@ -60,7 +60,7 @@ def bi_dir_earch(db, source_id, target_id):
                 for src1, src2_dict in source_tree[source_id].items():
                     for src2, src3_arr in src2_dict.items():
                         for tgt1, tgt2_arr in target_tree[target_id].items():
-                            for match in findMatch(src3_arr, tgt2_arr):
+                            for match in findMatches(src3_arr, tgt2_arr):
                                 paths.append([source_id, src1, src2, match, tgt1, target_id])
                 print("5th: ", time() - start)
                 
@@ -80,7 +80,7 @@ def bi_dir_earch(db, source_id, target_id):
                 target_tree[target_id] = db.find_incoming(target_tree[target_id])
                 for tgt1, tgt2_arr in target_tree[target_id].items():
                     for src1, src2_arr in source_tree[source_id].items():
-                        for match in findMatch(src2_arr, tgt2_arr):
+                        for match in findMatches(src2_arr, tgt2_arr):
                             paths.append([source_id, src1, match, tgt1, target_id])
                 print("4th: ", time() - start)
 
@@ -92,7 +92,7 @@ def bi_dir_earch(db, source_id, target_id):
                     for tgt2, tgt3_arr in tgt2_dict.items():
                         for src1, src2_dict in source_tree[source_id].items():
                             for src2, src3_arr in src2_dict.items():
-                                for match in findMatch(src3_arr, tgt3_arr):
+                                for match in findMatches(src3_arr, tgt3_arr):
                                     paths.append([source_id, src1, src2, match, tgt2, tgt1, target_id])
                 print("6th: ", time() - start)
 
