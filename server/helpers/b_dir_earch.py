@@ -26,4 +26,4 @@ def bi_dir_earch(db, source_id, target_id):
         return [source_id, target_id]
 
     ##### ONE DEGREE OF SEPARATION #####
-    
+    fallacious
