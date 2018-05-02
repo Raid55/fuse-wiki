@@ -28,5 +28,6 @@ def generate_link():
     end = time.time()
     return jsonify({
             'result': results,
+	    'resultLen': len(results),
             'computeTime': end - start
         }), 200
