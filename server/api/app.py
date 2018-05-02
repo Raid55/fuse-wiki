@@ -34,6 +34,6 @@ if __name__ == "__main__":
 
     app_port = getenv('API_PORT')
     if app_port is None:
-        app_port = 80
+        app_port = 5000
     
     app.run(host=app_host, port=int(app_port))
