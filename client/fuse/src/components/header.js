@@ -5,7 +5,7 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <div className="ui massive borderless secondary pointing menu">
+        <div className="ui inverted massive borderless secondary pointing menu">
           <div className="item">FUSE</div>
           <div className="right menu">
             <a className="active item">Home</a>
@@ -13,6 +13,7 @@ class Header extends Component {
             <a className="item">Social</a>
           </div>
         </div>
+        <br />
       </div>
     );
   }

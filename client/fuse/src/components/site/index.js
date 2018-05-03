@@ -48,17 +48,19 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="ui vertical masthead center aligned segment">
-          <Form
-            getLinks={this.getLinks}
-            isLoading={this.state.isLoading}
-            sourceVal={this.state.sourceVal}
-            targetVal={this.state.targetVal}
-            sourceChange={this.sourceChange}
-            targetChange={this.targetChange}
-          />
-          {this.state.links ? <Links links={this.state.links} /> : <h1>Please enter values</h1>}
-      </div>
+      <div className="ui center aligned container">
+        <h1 className="ui huge inverted header">Welcome to fuse.wiki</h1>
+        <Form
+          getLinks={this.getLinks}
+          isLoading={this.state.isLoading}
+          sourceVal={this.state.sourceVal}
+          targetVal={this.state.targetVal}
+          sourceChange={this.sourceChange}
+          targetChange={this.targetChange}
+        />
+        {/* {this.state.links ? <Links links={this.state.links} /> : <h1 className="ui inverted header">Please enter values</h1>} */}
+        <Links />
+        </div>
     );
   }
 }
