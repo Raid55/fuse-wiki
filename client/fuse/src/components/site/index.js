@@ -5,7 +5,7 @@ import Links from './links';
 export default class extends Component {
   state = {
     isLoading: false,
-    links: [],
+    links: null,
     error: false,
     sourceVal: "",
     targetVal: ""
@@ -14,22 +14,50 @@ export default class extends Component {
   getLinks = async (e) => {
     e.preventDefault();
 
-    fetch('api.fuse.wiki/v1/generate_link')
+    fetch('http://206.189.73.204:5000/v1/generate_link',
+    {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({raw_source_title: this.state.sourceVal, raw_target_title: this.state.targetVal})
+    })
+      .then( res => res.json())
       .then( res => {
-        this.setState({links: res.json(), isLoading: false});
-      });
+        console.log(res)
+        this.setState({links: res, isLoading: false});
+      })
       .catch( err => {
         this.setState({error: true, isLoading: false});
+        console.log(err);
       })
 
     this.setState({isLoading: true});
   }
 
+  sourceChange = async (e) => {
+    e.preventDefault();
+    this.setState({sourceVal: e.target.value})
+  }
+
+  targetChange = async (e) => {
+    e.preventDefault();
+    this.setState({targetVal: e.target.value})
+  }
+
   render() {
     return (
-      <div>
-          <Form /> {/*pass props to get form change*/}
-          <Links />{/*pass to update link state*/}
+      <div className="ui vertical masthead center aligned segment">
+          <Form
+            getLinks={this.getLinks}
+            isLoading={this.state.isLoading}
+            sourceVal={this.state.sourceVal}
+            targetVal={this.state.targetVal}
+            sourceChange={this.sourceChange}
+            targetChange={this.targetChange}
+          />
+          {this.state.links ? <Links links={this.state.links} /> : <h1>Please enter values</h1>}
       </div>
     );
   }

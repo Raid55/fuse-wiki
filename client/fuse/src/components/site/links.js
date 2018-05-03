@@ -5,7 +5,9 @@ class Link extends Component {
   render() {
     return (
       <div>
-          links
+
+          { this.props.links.result[0].map(ell => <div className="ui segment" key={ell}>{ell}</div>)
+          }
       </div>
     );
   }
