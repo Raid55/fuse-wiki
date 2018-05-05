@@ -1,0 +1,21 @@
+server {
+    server_name api.fuse.wiki;
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/api.fuse.wiki/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/api.fuse.wiki/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/fuse/fuse-wiki/server/fuse-gunicorn.sock;
+    }
+}
+server {
+
+    listen 80;
+    server_name api.fuse.wiki;
+    return 301 https://api.fuse.wiki$request_uri;
+
+}
