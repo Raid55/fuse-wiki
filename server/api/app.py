@@ -13,7 +13,7 @@ CORS(app)
 
 app.register_blueprint(api_v1, url_prefix='/v1')
 
-sentry = Sentry(app, dsn=getenv('SENTRY_DNS'))
+sentry = Sentry(app, dsn=getenv('SENTRY_DSN'))
 
 # @app.teardown_appcontext
 # def close_method(exception):
