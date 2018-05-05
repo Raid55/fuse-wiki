@@ -5,9 +5,11 @@ from os import getenv
 from api.v1 import api_v1
 from flask import Flask, make_response, jsonify
 from flask_cors import CORS
+from raven.contrib.flask import Sentry
 
 
 app = Flask(__name__)
+sentry = Sentry(app)
 CORS(app)
 
 app.register_blueprint(api_v1, url_prefix='/v1')
