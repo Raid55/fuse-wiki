@@ -3,90 +3,85 @@
     The method 'findTheWikiConnection' finds the articles that connect
         two given articles
 '''
+from time import time
+
+def findMatches(array_1, array_2):
+    return set(array_1).intersection(array_2)
 
 
-def brute_force_algo(db, source_id, target_id):
+def bi_dir_earch(db, source_id, target_id):
     '''
         This Python method contains an algorithm that will find 0, 1, or more
         paths of Wikipedia articles that link a source article and a
-        target article.
+        target article. This is v2
     '''
-    ####### ERROR CHECKING #######
-    # Check if the id's given are valid Wikipedia articles
-    # Check if the database connection can be established
-
-
+    ##### ERROR CHECKING #####
     if source_id is None or target_id is None:
-        return [] 
+        return "Error: There was a non-existent source or target article"
 
-    print(source_id, target_id)
+    ##### ZERO DEGREES OF SEPARATION #####
+    if source_id == target_id:
+        return [source_id, target_id]
+
+    ##### DECLARE PERSISTENT OBJECTS #####
+    paths = []
     source_id = str(source_id)
     target_id = str(target_id)
-    ####### SETUP #######
-    paths = []
-
-    ####### 0 DEGREES OF SEPARATION #######
-    if source_id == target_id:
-        return [0]
-
-    ####### 1 DEGREE OF SEPARATION #######
-    source_1 = db.find_outgoing([source_id])
-    if target_id in source_1[source_id]:
-        paths.append([source_id, target_id])
-        return paths
-
-    ####### 2 DEGREES OF SEPARATION #######
-    target_1 = db.find_incoming([target_id])
-    for article in source_1[source_id]:
-        if article in target_1[target_id]:
-            paths.append([source_id, article, target_id])
-    if len(paths) != 0:
-        return paths
-
-    ##### 3 DEGREES OF SEPARATION #####
-    source_2 = db.find_outgoing(source_1[source_id])
-    # print(source_2)
-    # print(target_1)
-    for k, v in source_2.items():
-        print(k, v)
-        for article in v:
-            if article in target_1[target_id]:
-                paths.append([source_id, k, article, target_id])
-    if len(paths) != 0:
-        return paths
+    source_tree = {}
+    target_tree = {}
+    source_depth = 0
+    target_depth = 0
 
 
+    while len(paths) == 0 and (source_depth < 3 or target_depth < 3):
+        if source_depth == target_depth:
+            source_depth += 1
 
-    ##### 4 DEGREES OF SEPARATION #####
-    # Creates nodes of each outgoing link from each '1src' node
-    # For each node created:
-    #     if that node has an outgoing link that is any of the 1tgt' nodes:
-    #         append to 'paths' a path of 0src---1src---crrnt---1tgt---0tgt
-    # if 'paths' is non-empty:
-    #     return 'paths'
-#
- #   target_2 = []
-  #  for article in target_1:
-   #     target_2.append('ORM call that returns incoming links from each element in target_1')
-#    for i in range(len(target_2)):
- #       for article in target_2[i]:
-  #          for j in
+            if source_depth == 1:
+                source_tree = db.find_outgoing([source_id])
+                if target_id in source_tree[source_id]:
+                    paths.append([source_id, target_id])
+
+            if source_depth == 2:
+                source_tree[source_id] = db.find_outgoing(source_tree[source_id])
+                for src1, src2_arr in source_tree[source_id].items():                    
+                    for match in findMatches(src2_arr, target_tree[target_id]):
+                        paths.append([source_id, src1, match, target_id])
+                
+            if source_depth == 3:
+                for key, value in source_tree[source_id].items():
+                    source_tree[source_id][key] = db.find_outgoing(value)
+                for src1, src2_dict in source_tree[source_id].items():
+                    for src2, src3_arr in src2_dict.items():
+                        for tgt1, tgt2_arr in target_tree[target_id].items():
+                            for match in findMatches(src3_arr, tgt2_arr):
+                                paths.append([source_id, src1, src2, match, tgt1, target_id])
+                
+        else:
+            target_depth += 1
+
+            if target_depth == 1:
+                target_tree = db.find_incoming([target_id])
+                for match in findMatches(source_tree[source_id], target_tree[target_id]):
+                    paths.append([source_id, match, target_id])
+
+            if target_depth == 2:
+                target_tree[target_id] = db.find_incoming(target_tree[target_id])
+                for tgt1, tgt2_arr in target_tree[target_id].items():
+                    for src1, src2_arr in source_tree[source_id].items():
+                        for match in findMatches(src2_arr, tgt2_arr):
+                            paths.append([source_id, src1, match, tgt1, target_id])
+
+            if target_depth == 3:
+                for key, value in target_tree[target_id].items():
+                    target_tree[target_id][key] = db.find_incoming(value)
+                for tgt1, tgt2_dict in target_tree[target_id].items():
+                    for tgt2, tgt3_arr in tgt2_dict.items():
+                        for src1, src2_dict in source_tree[source_id].items():
+                            for src2, src3_arr in src2_dict.items():
+                                for match in findMatches(src3_arr, tgt3_arr):
+                                    paths.append([source_id, src1, src2, match, tgt2, tgt1, target_id])
+
+    return paths
 
 
-    ##### 5 DEGREES OF SEPARATION #####
-    # Create nodes of each incoming link to each '1tgt' node
-    # For each node created:
-    #     if that node has an incoming link that is any of the '2src' nodes:
-    #         append to 'paths' a path of 0src---1src---2src---cnt---1tgt---0tgt
-    # if 'paths' is non-empty:
-    #     return 'paths'
-
-    ##### 6 DEGREES OF SEPARATION #####
-    # Creates nodes of each outgoing link from each '2src' node
-    # For each node created:
-    #     if that node has an outgoing link that is any of the '2tgt' nodes:
-    #         append to 'paths' a path of 0sc--1sc--2sc--crrnt--2tg--1tg--0tg
-    # if 'paths' is non-empty:
-    #     return 'paths'
-    # else:
-    #     return 'path not found'

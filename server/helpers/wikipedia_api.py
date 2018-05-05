@@ -41,6 +41,7 @@ def wiki_search_id(query):
     rJson = ret.json()
     if 'suggestion' in rJson['query']['searchinfo']:
         ret = requests.get(base_link + rmv_spaces(rJson['query']['searchinfo']['suggestion']))
+        print (base_link + rmv_spaces(rJson['query']['searchinfo']['suggestion']))
         if test_return(ret) is False:
             return None
         else:

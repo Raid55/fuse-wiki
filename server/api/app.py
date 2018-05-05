@@ -4,9 +4,11 @@ import socket
 from os import getenv
 from api.v1 import api_v1
 from flask import Flask, make_response, jsonify
+from flask_cors import CORS
+
 
 app = Flask(__name__)
-
+CORS(app)
 
 app.register_blueprint(api_v1, url_prefix='/v1')
 
@@ -34,6 +36,6 @@ if __name__ == "__main__":
 
     app_port = getenv('API_PORT')
     if app_port is None:
-        app_port = 80
+        app_port = 5000
     
     app.run(host=app_host, port=int(app_port))

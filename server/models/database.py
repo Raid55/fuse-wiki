@@ -1,6 +1,6 @@
 import os.path
 import sqlite3
-from helpers.b_dir_earch import brute_force_algo
+from helpers.b_dir_earch import bi_dir_earch
 
 
 class Database:
@@ -41,7 +41,7 @@ class Database:
 
     def find_title(self, page_id):
         query = "SELECT title FROM pages WHERE id={}"
-        return [row for row in self.__curr.execute(query.format(page_id))][0]
+        return [row[0] for row in self.__curr.execute(query.format(page_id))][0]
 
     def find_titles(self, arr):
         return [self.find_title(page_id) for page_id in arr]
@@ -52,9 +52,10 @@ class Database:
         return [self.find_titles(row) for row in matrix]
 
     def findTheWikiConnection(self, source_id, target_id):
-        resMatrix = brute_force_algo(self, source_id, target_id)
+        resMatrix = bi_dir_earch(self, source_id, target_id)
         if (type(resMatrix) == str):
             return resMatrix
+        
         return self.matrix_ids_to_titles(resMatrix)
 
 
