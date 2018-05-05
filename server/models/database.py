@@ -17,14 +17,18 @@ class Database:
         self.__curr = self.__connection.cursor()
         
 
+    def arr_to_qStr(self, arr):
+        """ array to querry ready in statment string """
+        return str(tuple(arr)).replace(',)', ')').replace('u', '')
+
     def find_outgoing(self, arr):
         """
             Takes an array of ids and returns all outgoing links
             for each elem
         """
         query = "SELECT id, outgoing_links FROM links WHERE id IN {}"
-        # print(query)
-        res = self.__curr.execute(query.format(str(tuple(arr)).replace(',)', ')')))
+        # print(query.format(self.arr_to_str(arr)))
+        res = self.__curr.execute(query.format(self.arr_to_qStr(arr)))
         return {str(row[0]): row[1].split("|") for row in res}
         
 
@@ -34,8 +38,8 @@ class Database:
             for each elem
         """
         query = "SELECT id, incoming_links FROM links WHERE id IN {}"
-        # print(query)
-        res = self.__curr.execute(query.format(str(tuple(arr)).replace(',)', ')')))
+        # print(query.format(self.arr_to_str(arr)))
+        res = self.__curr.execute(query.format(self.arr_to_qStr(arr)))
         return {str(row[0]): row[1].split("|") for row in res}
 
 

@@ -19,15 +19,25 @@ def generate_link():
         return jsonify({'error': 'Missing name'}), 400
     if not data['raw_target_title']:
         return jsonify({'error': 'Missing raw_target_title'}), 400
-    
-    results = db.findTheWikiConnection(
-        wiki_search_id(data['raw_source_title']),
-        wiki_search_id(data['raw_target_title'])
-    )
+    try:
+        results = db.findTheWikiConnection(
+            wiki_search_id(data['raw_source_title']),
+            wiki_search_id(data['raw_target_title'])
+        )
+    except Exception as e:
+        print(e)
+        # results = e
+        results = "error"
 
     end = time.time()
-    return jsonify({
+    if type(results) == str:
+        return jsonify({
+            'err': results,
+            'computeTime': end - start
+        }), 401
+    else:
+        return jsonify({
             'result': results,
-	    'resultLen': len(results),
+            'resultLen': len(results),
             'computeTime': end - start
         }), 200
