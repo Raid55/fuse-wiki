@@ -15,9 +15,9 @@ def generate_link():
     if data is None:
         return jsonify({'error':'Not in JSON format'}), 400
     
-    if not data['raw_source_title']:
+    if 'raw_source_title' not in data:
         return jsonify({'error': 'Missing name'}), 400
-    if not data['raw_target_title']:
+    if 'raw_target_title' not in data:
         return jsonify({'error': 'Missing raw_target_title'}), 400
     try:
         results = db.findTheWikiConnection(
@@ -26,6 +26,7 @@ def generate_link():
         )
     except Exception as e:
         print(e)
+        api_v1.logger.error(e)
         # results = e
         results = "error"
 
