@@ -21,16 +21,22 @@ def generate_link():
     if 'raw_target_title' not in data:
         return jsonify({'error': 'Missing raw_target_title'}), 400
     try:
-        results = db.findTheWikiConnection(
-            wiki_search_id(data['raw_source_title']),
-            wiki_search_id(data['raw_target_title'])
-        )
+        source_id = wiki_search_id(data['raw_source_title'])
+        target_id = wiki_search_id(data['raw_target_title'])
+        results = db.find_cached_search(source_id, target_id)
+        if results is None:
+            results = db.findTheWikiConnection(
+                source_id,
+                target_id
+            )
+            if type(results) == list:
+                db.save_search(source_id, target_id, results)
     except Exception as e:
         print(e)
         current_app.logger.error(e)
         # results = e
         results = "error"
-    current_app.logger("lol")
+
     end = time.time()
     if type(results) == str:
         return jsonify({
