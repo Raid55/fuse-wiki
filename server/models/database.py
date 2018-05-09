@@ -53,7 +53,7 @@ class Database:
     def find_titles(self, arr):
         return [self.find_title(page_id) for page_id in arr]
 
-    def find_cached_searches(self, source_id, target_id):
+    def find_cached_search(self, source_id, target_id):
         query = "SELECT search FROM searches WHERE source_id={} AND target_id={}"
         try:
             return json.loads([row[0] for row in self.__srch_curr.execute(query.format(source_id, target_id))][0])
