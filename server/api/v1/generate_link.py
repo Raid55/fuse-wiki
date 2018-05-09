@@ -2,6 +2,7 @@ from models import Database
 from api.v1 import api_v1
 from flask import jsonify, abort, request
 from helpers.wikipedia_api import wiki_search_id
+from flask import current_app
 import time
 
 # creating db session
@@ -26,10 +27,10 @@ def generate_link():
         )
     except Exception as e:
         print(e)
-        api_v1.logger.error(e)
+        current_app.logger.error(e)
         # results = e
         results = "error"
-
+    current_app.logger("lol")
     end = time.time()
     if type(results) == str:
         return jsonify({
