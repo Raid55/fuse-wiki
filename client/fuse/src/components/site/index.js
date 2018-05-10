@@ -14,7 +14,7 @@ export default class extends Component {
   getLinks = async (e) => {
     e.preventDefault();
 
-    fetch('http://206.189.73.204:5000/v1/generate_link',
+    fetch('https://api.fuse.wiki/v1/generate_link',
     {
       method: 'post',
       headers: {
@@ -26,7 +26,7 @@ export default class extends Component {
       .then( res => res.json())
       .then( res => {
         console.log(res)
-        this.setState({links: res, isLoading: false});
+        this.setState({links: res.result, isLoading: false});
       })
       .catch( err => {
         this.setState({error: true, isLoading: false});
@@ -58,8 +58,7 @@ export default class extends Component {
           sourceChange={this.sourceChange}
           targetChange={this.targetChange}
         />
-        {/* {this.state.links ? <Links links={this.state.links} /> : <h1 className="ui inverted header">Please enter values</h1>} */}
-        <Links />
+        {this.state.links ? <Links links={this.state.links[0]} /> : <h1 className="ui inverted header">Please enter values</h1>}
         </div>
     );
   }
