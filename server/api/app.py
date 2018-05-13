@@ -4,12 +4,16 @@ import socket
 from os import getenv
 from api.v1 import api_v1
 from flask import Flask, make_response, jsonify
+# from raven.contrib.flask import Sentry
+from flask_cors import CORS
+
 
 app = Flask(__name__)
-
+CORS(app)
 
 app.register_blueprint(api_v1, url_prefix='/v1')
 
+# sentry = Sentry(app, dsn=getenv('SENTRY_DSN'))
 
 # @app.teardown_appcontext
 # def close_method(exception):
@@ -24,16 +28,5 @@ def root_test():
     return jsonify({"status": "ok"}), 200
 
 if __name__ == "__main__":
-    #try:
-    #   host_name = socket.gethostname()
-    #   app_host = socket.gethostbyname(host_name)
-    #except:
-    #   app_host = getenv('API_HOST')
-    #   if app_host is None:
-    app_host = '206.189.73.204'
-
-    app_port = getenv('API_PORT')
-    if app_port is None:
-        app_port = 80
-    
-    app.run(host=app_host, port=int(app_port))
+    app_host = '0.0.0.0'
+    app.run(host=app_host,)

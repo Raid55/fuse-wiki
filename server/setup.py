@@ -6,7 +6,10 @@ from setuptools import setup, find_packages
 requires = [
     'Flask',
     'sqlite3',
-    'requests'
+    'requests',
+    'flask_cors',
+    'gunicorn',
+    'supervisor'
 ]
 
 
