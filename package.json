@@ -1,0 +1,29 @@
+{
+  "name": "fuse-wiki",
+  "version": "1.0.0",
+  "description": "## Objectives  * Create a minimum viable product    - Title and a prompt for the user    - Two inputs for the articles that want to be linked    - A \"connect\" button    - The output of which articles link them    - Domain name and server  * Extra features for the future",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sudo node app.js",
+    "dev": "sudo nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raid55/fuse-wiki.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raid55/fuse-wiki/issues"
+  },
+  "homepage": "https://github.com/Raid55/fuse-wiki#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "helmet": "^3.12.1",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
+  }
+}
